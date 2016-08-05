@@ -1,0 +1,22 @@
+{
+  "name": "schooljs-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redpelicans/schooljs-express.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "redpelicans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redpelicans/schooljs-express/issues"
+  },
+  "homepage": "https://github.com/redpelicans/schooljs-express#readme"
+}
