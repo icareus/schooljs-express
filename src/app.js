@@ -4,6 +4,7 @@ import async from 'async';
 import {default as bodyParser} from 'body-parser';
 import express from 'express';
 import {init as initPing} from './ping';
+import {init as initVersion} from './version';
 
 const url = (host, server) => 'http://' + host + ':' + server.address().port;
 
@@ -51,7 +52,8 @@ export function start(config, resources, cb) {
       next();
     });
 
-    initPing(app, resources);
+    initPing(app);
+    initVersion(app, resources);
 
     cb(null, { stop, url: url(config.host, httpServer) });
   });
