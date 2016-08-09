@@ -1,6 +1,6 @@
-// Lorem ipsum dolor sit amet
+// GET /version shows version rom package.json
 export function init(app, resources) {
   app.get('/version', function(req, res) {
-    res.json({ version: 'resources.version' });
+    res.json({ version: resources.version });
   });
 }

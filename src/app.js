@@ -5,6 +5,9 @@ import {default as bodyParser} from 'body-parser';
 import express from 'express';
 import {init as initPing} from './ping';
 import {init as initVersion} from './version';
+import {init as initLogger} from './logger';
+import {init as initErrer} from './errer';
+import {init as initCors} from './cors'
 
 const url = (host, server) => 'http://' + host + ':' + server.address().port;
 
@@ -52,8 +55,11 @@ export function start(config, resources, cb) {
       next();
     });
 
-    initPing(app);
+    initLogger(app);
+    initCors(app);
     initVersion(app, resources);
+    initPing(app);
+    initErrer(app);
 
     cb(null, { stop, url: url(config.host, httpServer) });
   });

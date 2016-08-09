@@ -1,0 +1,13 @@
+// enable CORS
+const cors = (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  req.method === 'OPTIONS'
+  ? res.sendStatus(200)
+  : next()
+}
+
+export function init(app) {
+  app.use(cors);
+}
