@@ -16,24 +16,21 @@ const get = (req, res) => {
 }
 
 const post = (req, res) => {
-  if (! req.body.todo.label) {
-    res.status(400).json(req.body);
-    return
-  }
+  if (! req.body.todo.label) { return res.status(400).json(req.body) }
   const newList = { label: req.body.todo.label, id }
   id = id + 1;
   lists.push(newList);
-  res.json(newList);
+  res.status(200).json(newList);
 }
 
-const put = (req, res) => {
-  if (! req.body.todo.label && req.body.todo.id) {
-    res.status(400).json(req.body);
-    return
-  }
+const put = (req, res, next) => {
   const newlist = {
     id: req.body.todo.id,
     label: req.body.todo.label
+  }
+  if (! newlist.label && newlist.id) {
+    // return next({status: 400, message: req.body}) -> TODO
+    return res.status(400).json(req.body);
   }
   lists = _.map(lists, item => (
     item.id === newlist.id
