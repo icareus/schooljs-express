@@ -25,10 +25,7 @@ const get = (req, res) => {
 
 const post = (req, res) => {
   if (! req.body.todo.label) { return res.status(400).json(req.body) }
-  const newList = { id, label: req.body.todo.label }
-  id = id + 1;
-  lists.push(newList);
-  res.status(200).json(newList);
+  db.postList(req.body.todo.label, (err, list) => res.status(200).json(list))
 }
 
 const put = (req, res, next) => {
@@ -49,8 +46,9 @@ const put = (req, res, next) => {
 }
 
 const remove = (req, res) => {
-  lists = _.reject(lists, item => item.id === parseInt(req.params.id))
-  res.status(200).json({id: req.params.id})
+  db.delList(req.params.id, console.log)
+  // lists = _.reject(lists, item => item.id === parseInt(req.params.id))
+  // res.status(200).json({id: req.params.id})
 }
 
 export function init(app) {
