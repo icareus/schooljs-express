@@ -47,8 +47,8 @@ const postList = (label, cb) => {
 const delList = (id, cb) => {
   async.waterfall([
     cb => client.del(`lists:${id}`, (err, res) => cb(err, res)),
-    cb => client.srem('lists', `lists:${id}`, cb),
-  ], (err, res) => (console.log(err, res), cb(err, res)))
+    (status, cb) => client.srem('lists', `lists:${id}`, cb),
+  ], (err, res) => cb(null, id))
 }
 
 const odm = {

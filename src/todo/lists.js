@@ -45,10 +45,8 @@ const put = (req, res, next) => {
   res.status(200).json('OK')
 }
 
-const remove = (req, res) => {
-  db.delList(req.params.id, console.log)
-  // lists = _.reject(lists, item => item.id === parseInt(req.params.id))
-  // res.status(200).json({id: req.params.id})
+const remove = (request, response) => {
+  db.delList(request.params.id, (err, res) => response.status(200).json({id: res}))
 }
 
 export function init(app) {
