@@ -5,10 +5,12 @@
 // DELETE /todo/lists/:id
 import _ from 'lodash'
 
-let id = 1;
+let id = 3;
 
 let lists = [
   {id: 0, label: 'a test list'},
+  {id: 1, label: 'second test'},
+  {id: 2, label: 'test three'},
 ]
 
 const get = (req, res) => {
@@ -17,7 +19,7 @@ const get = (req, res) => {
 
 const post = (req, res) => {
   if (! req.body.todo.label) { return res.status(400).json(req.body) }
-  const newList = { label: req.body.todo.label, id }
+  const newList = { id, label: req.body.todo.label }
   id = id + 1;
   lists.push(newList);
   res.status(200).json(newList);
@@ -41,8 +43,8 @@ const put = (req, res, next) => {
 }
 
 const remove = (req, res) => {
-  lists = _.remove(lists, item => item.id === req.params.id)
-  res.status(200).json(req.params.id)
+  lists = _.reject(lists, item => item.id === parseInt(req.params.id))
+  res.status(200).json({id: req.params.id})
 }
 
 export function init(app) {
