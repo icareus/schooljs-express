@@ -4,6 +4,11 @@
 // PUT /todo/lists
 // DELETE /todo/lists/:id
 import _ from 'lodash'
+import async from 'async'
+
+import db from './db'
+
+// const redis = Redis()
 
 let id = 3;
 
@@ -14,7 +19,8 @@ let lists = [
 ]
 
 const get = (req, res) => {
-  res.json(lists);
+  db.getLists((err, lists) => res.status(200).json(lists))
+  // res.json(lists);
 }
 
 const post = (req, res) => {
@@ -48,6 +54,7 @@ const remove = (req, res) => {
 }
 
 export function init(app) {
+  // redis.get(lists).then(lists => _.map())
   app.get('/todo/lists', get);
   app.post('/todo/lists', post);
   app.put('/todo/lists', put);
